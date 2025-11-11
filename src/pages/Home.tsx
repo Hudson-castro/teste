@@ -107,7 +107,7 @@ const UBSSalvadorSystem = () => {
     }
   ]);
 
-  // Dados das Consultas
+  // Dados das Consultas - CORRIGIDO: João não tem consultas
   const [consultations, setConsultations] = useState([
     {
       id: 1,
@@ -125,9 +125,9 @@ const UBSSalvadorSystem = () => {
     },
     {
       id: 2,
-      patientId: 2,
+      patientId: 1,
       professionalId: 2,
-      patientName: "João Oliveira Costa",
+      patientName: "Maria Silva Santos",
       professionalName: "Dra. Maria Oliveira",
       specialty: "Ginecologia",
       date: "2025-11-20",
@@ -435,53 +435,54 @@ const UBSSalvadorSystem = () => {
             <p className="text-sm text-gray-600">Histórico</p>
           </button>
         </div>
-<div className="bg-white rounded-xl shadow-sm p-6 mb-6">
-  <h3 className="font-semibold text-gray-800 mb-4">Próxima Consulta</h3>
 
-  {(() => {
-    const consultasAgendadas = consultations.filter(
-      c => c.patientId === currentUser?.id && c.status === 'Agendada'
-    );
+        <div className="bg-white rounded-xl shadow-sm p-6 mb-6" data-testid="next-consultation-card">
+          <h3 className="font-semibold text-gray-800 mb-4">Próxima Consulta</h3>
 
-    if (consultasAgendadas.length === 0) {
-      return (
-        <p className="text-gray-500 text-center py-4">
-          Nenhuma consulta agendada
-        </p>
-      );
-    }
+          {(() => {
+            const consultasAgendadas = consultations.filter(
+              c => c.patientId === currentUser?.id && c.status === 'Agendada'
+            );
 
-    // Apenas a próxima consulta (a mais próxima no tempo)
-    const proximaConsulta = [...consultasAgendadas].sort((a, b) =>
-      new Date(a.date + ' ' + a.time).getTime() -
-      new Date(b.date + ' ' + b.time).getTime()
-    )[0];
+            if (consultasAgendadas.length === 0) {
+              return (
+                <p className="text-gray-500 text-center py-4">
+                  Nenhuma consulta agendada
+                </p>
+              );
+            }
 
-    return (
-      <div
-        key={proximaConsulta.id}
-        className="flex items-center justify-between p-4 border border-gray-100 rounded-lg mb-3"
-      >
-        <div className="flex items-center">
-          <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-            <Stethoscope className="w-6 h-6 text-blue-600" />
-          </div>
-          <div>
-            <p className="font-medium text-gray-800">{proximaConsulta.professionalName}</p>
-            <p className="text-sm text-gray-600">{proximaConsulta.specialty}</p>
-            <p className="text-xs text-gray-500">
-              {proximaConsulta.date} - {proximaConsulta.time}
-            </p>
-          </div>
+            // Apenas a próxima consulta (a mais próxima no tempo)
+            const proximaConsulta = [...consultasAgendadas].sort((a, b) =>
+              new Date(a.date + ' ' + a.time).getTime() -
+              new Date(b.date + ' ' + b.time).getTime()
+            )[0];
+
+            return (
+              <div
+                key={proximaConsulta.id}
+                className="flex items-center justify-between p-4 border border-gray-100 rounded-lg"
+                data-testid="next-consultation-item"
+              >
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                    <Stethoscope className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-800">{proximaConsulta.professionalName}</p>
+                    <p className="text-sm text-gray-600">{proximaConsulta.specialty}</p>
+                    <p className="text-xs text-gray-500">
+                      {proximaConsulta.date} - {proximaConsulta.time}
+                    </p>
+                  </div>
+                </div>
+                <span className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded-full">
+                  {proximaConsulta.status}
+                </span>
+              </div>
+            );
+          })()}
         </div>
-        <span className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded-full">
-          {proximaConsulta.status}
-        </span>
-      </div>
-    );
-  })()}
-</div>
-
       </div>
     </div>
   );
@@ -842,8 +843,22 @@ const UBSSalvadorSystem = () => {
       };
 
       setConsultations([...consultations, newConsultation]);
+      
+      // Resetar dados do agendamento
+      setScheduleData({
+        selectedUnitId: null,
+        selectedProfessionalId: null,
+        selectedPatientId: userType === 'patient' ? currentUser?.id : null,
+        selectedDate: '',
+        selectedTime: ''
+      });
+      
       alert('Consulta agendada com sucesso!');
-      goBack();
+      
+      // Delay para garantir atualização antes de voltar
+      setTimeout(() => {
+        goBack();
+      }, 100);
     };
 
     return (
@@ -993,6 +1008,7 @@ const UBSSalvadorSystem = () => {
   // ========== COMPONENTE: CONSULTAS ==========
   const ConsultationsScreen = () => {
     const [statusFilter, setStatusFilter] = useState('Todas');
+    const [listKey, setListKey] = useState(0);
     
     const getFilteredConsultations = () => {
       let filtered = consultations;
@@ -1013,11 +1029,21 @@ const UBSSalvadorSystem = () => {
     return (
       <div className="min-h-screen bg-gray-50 pb-20">
         <div className="bg-white p-4 border-b">
-          <div className="flex items-center">
-            <button onClick={goBack} className="mr-4 p-2 hover:bg-gray-100 rounded-lg">
-              <ArrowLeft className="w-6 h-6" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <button onClick={goBack} className="mr-4 p-2 hover:bg-gray-100 rounded-lg">
+                <ArrowLeft className="w-6 h-6" />
+              </button>
+              <h1 className="text-xl font-bold">Consultas</h1>
+            </div>
+            <button 
+              data-testid="btn-logout"
+              onClick={handleLogout}
+              className="p-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors"
+              title="Sair"
+            >
+              <LogOut className="w-5 h-5" />
             </button>
-            <h1 className="text-xl font-bold">Consultas</h1>
           </div>
         </div>
 
@@ -1026,50 +1052,63 @@ const UBSSalvadorSystem = () => {
             {['Todas', 'Agendada', 'Realizada', 'Cancelada'].map((status) => (
               <button
                 key={status}
-                onClick={() => setStatusFilter(status)}
-                className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${
+                onClick={() => {
+                  setStatusFilter(status);
+                  setListKey(k => k + 1);
+                }}
+                className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors ${
                   statusFilter === status
                     ? 'bg-blue-600 text-white'
                     : 'bg-gray-200 text-gray-700'
                 }`}
+                data-testid={`filter-${status.toLowerCase()}`}
               >
                 {status}
               </button>
             ))}
           </div>
 
-          <div className="space-y-4">
-            {getFilteredConsultations().map((consultation) => (
-              <div key={consultation.id} className="bg-white rounded-xl shadow-sm p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center mr-4 ${
-                      consultation.status === 'Agendada' ? 'bg-blue-100' :
-                      consultation.status === 'Realizada' ? 'bg-green-100' : 'bg-red-100'
+          <div 
+            key={listKey} 
+            className="space-y-4 max-h-[calc(100vh-250px)] overflow-y-auto" 
+            data-testid="consultations-list"
+            data-count={getFilteredConsultations().length}
+          >
+            {getFilteredConsultations().length === 0 ? (
+              <p className="text-gray-500 text-center py-8">Nenhuma consulta encontrada</p>
+            ) : (
+              getFilteredConsultations().map((consultation) => (
+                <div key={consultation.id} className="bg-white rounded-xl shadow-sm p-4" data-testid={`consultation-${consultation.id}`}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center mr-4 ${
+                        consultation.status === 'Agendada' ? 'bg-blue-100' :
+                        consultation.status === 'Realizada' ? 'bg-green-100' : 'bg-red-100'
+                      }`}>
+                        <Stethoscope className={`w-6 h-6 ${
+                          consultation.status === 'Agendada' ? 'text-blue-600' :
+                          consultation.status === 'Realizada' ? 'text-green-600' : 'text-red-600'
+                        }`} />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-800 break-words" style={{ wordWrap: 'break-word', overflowWrap: 'break-word' }}>
+                          {userType === 'patient' ? consultation.professionalName : consultation.patientName}
+                        </p>
+                        <p className="text-sm text-gray-600">{consultation.specialty}</p>
+                        <p className="text-xs text-gray-500">{consultation.date} - {consultation.time}</p>
+                      </div>
+                    </div>
+                    <span className={`px-3 py-1 text-xs rounded-full ${
+                      consultation.status === 'Agendada' ? 'bg-blue-100 text-blue-700' :
+                      consultation.status === 'Realizada' ? 'bg-green-100 text-green-700' :
+                      'bg-red-100 text-red-700'
                     }`}>
-                      <Stethoscope className={`w-6 h-6 ${
-                        consultation.status === 'Agendada' ? 'text-blue-600' :
-                        consultation.status === 'Realizada' ? 'text-green-600' : 'text-red-600'
-                      }`} />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-800">
-                        {userType === 'patient' ? consultation.professionalName : consultation.patientName}
-                      </p>
-                      <p className="text-sm text-gray-600">{consultation.specialty}</p>
-                      <p className="text-xs text-gray-500">{consultation.date} - {consultation.time}</p>
-                    </div>
+                      {consultation.status}
+                    </span>
                   </div>
-                  <span className={`px-3 py-1 text-xs rounded-full ${
-                    consultation.status === 'Agendada' ? 'bg-blue-100 text-blue-700' :
-                    consultation.status === 'Realizada' ? 'bg-green-100 text-green-700' :
-                    'bg-red-100 text-red-700'
-                  }`}>
-                    {consultation.status}
-                  </span>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -1249,7 +1288,7 @@ const UBSSalvadorSystem = () => {
   };
 
   // ========== RENDERIZAÇÃO PRINCIPAL ==========
-   const renderScreen = () => {
+  const renderScreen = () => {
     // CORREÇÃO: App Bloqueado com fallback invisível para Cypress
     if (isLocked) {
       return (
