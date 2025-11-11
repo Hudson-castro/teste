@@ -20,7 +20,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.contains(/olá, maria/i).should('be.visible');
     });
 
-    it('CT-01: Deve realizar agendamento completo com sucesso', () => {
+    it(' Deve realizar agendamento completo com sucesso', () => {
       // 1. Acessar tela de agendamento
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
@@ -66,7 +66,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.contains(/olá, maria/i, { timeout: 5000 }).should('be.visible');
     });
 
-    it('CT-02: Deve validar sequência correta do fluxo de agendamento', () => {
+    it('Deve validar sequência correta do fluxo de agendamento', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -93,7 +93,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.contains(/horários disponíveis/i).should('not.exist');
     });
 
-    it('CT-03: Deve filtrar profissionais pela UBS selecionada', () => {
+    it('Deve filtrar profissionais pela UBS selecionada', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -109,7 +109,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.contains('button', /dr\. carlos souza/i).should('not.exist'); // unitId: 3
     });
 
-    it('CT-04: Deve impedir seleção de data passada', () => {
+    it('Deve impedir seleção de data passada', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -125,7 +125,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
         .should('have.attr', 'min', hoje);
     });
 
-    it('CT-05: Deve exibir horários apenas após selecionar data', () => {
+    it('Deve exibir horários apenas após selecionar data', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -151,7 +151,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.contains('button', '14:00').should('be.visible');
     });
 
-    it('CT-06: Deve destacar horário selecionado', () => {
+    it('Deve destacar horário selecionado', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -185,7 +185,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
         .and('have.class', 'bg-blue-50');
     });
 
-    it('CT-07: Botão confirmar só deve aparecer após selecionar horário', () => {
+    it('Botão confirmar só deve aparecer após selecionar horário', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -211,7 +211,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.contains('button', /confirmar agendamento/i).should('be.visible');
     });
 
-    it('CT-08: Deve permitir navegar para trás no fluxo', () => {
+    it('Deve permitir navegar para trás no fluxo', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -242,7 +242,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.contains(/painel administrativo/i).should('be.visible');
     });
 
-    it('CT-09: Admin deve conseguir agendar para um paciente', () => {
+    it('Admin deve conseguir agendar para um paciente', () => {
       // 1. Acessar agendamento
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
@@ -280,7 +280,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-10: Deve validar fluxo sequencial do admin', () => {
+    it('Deve validar fluxo sequencial do admin', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -305,7 +305,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.contains(/selecione a data/i).should('not.exist');
     });
 
-    it('CT-11: Admin deve ver todos os pacientes disponíveis', () => {
+    it('Admin deve ver todos os pacientes disponíveis', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -315,7 +315,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.contains('button', /joão oliveira costa/i).should('be.visible');
     });
 
-    it('CT-12: Admin deve poder agendar para diferentes pacientes', () => {
+    it('Admin deve poder agendar para diferentes pacientes', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -341,7 +341,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.wait(500);
     });
 
-    it('CT-13: Deve exibir informações corretas da UBS', () => {
+    it('Deve exibir informações corretas da UBS', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -355,7 +355,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-14: Deve exibir especialidade do profissional', () => {
+    it('Deve exibir especialidade do profissional', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -373,7 +373,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-15: Deve exibir todos os horários disponíveis', () => {
+    it('Deve exibir todos os horários disponíveis', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -408,7 +408,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.wait(500);
     });
 
-    it('CT-16: Deve poder voltar ao dashboard a qualquer momento', () => {
+    it('Deve poder voltar ao dashboard a qualquer momento', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -427,7 +427,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.get('[data-testid="btn-schedule"]').should('be.visible');
     });
 
-    it('CT-17: Deve poder usar navegação bottom durante agendamento', () => {
+    it('Deve poder usar navegação bottom durante agendamento', () => {
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
 
@@ -443,7 +443,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.contains(/olá, maria/i).should('be.visible');
     });
 
-    it('CT-18: Deve limpar seleções ao sair do agendamento', () => {
+    it('Deve limpar seleções ao sair do agendamento', () => {
       // Primeiro agendamento parcial
       cy.get('[data-testid="btn-schedule"]').click();
       cy.wait(300);
@@ -469,7 +469,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
   // ==============================================================
   context('Integração com Lista de Consultas', () => {
 
-    it('CT-19: Consulta agendada deve aparecer na lista', () => {
+    it('Consulta agendada deve aparecer na lista', () => {
       // Login
       cy.get('[data-testid="input-email"]').clear().type('maria@email.com');
       cy.get('[data-testid="input-password"]').clear().type('123456');
@@ -511,7 +511,7 @@ describe('Agendamento de Consultas - UBS Digital Salvador', () => {
       cy.contains(/agendada/i).should('be.visible');
     });
 
-    it('CT-20: Consulta agendada deve aparecer no dashboard', () => {
+    it('Consulta agendada deve aparecer no dashboard', () => {
       // Login
       cy.get('[data-testid="input-email"]').clear().type('maria@email.com');
       cy.get('[data-testid="input-password"]').clear().type('123456');

@@ -19,7 +19,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.contains(/olá, maria/i, { timeout: 10000 }).should('be.visible');
     });
 
-    it('CT-01: Deve listar todas as consultas do paciente', () => {
+    it(': Deve listar todas as consultas do paciente', () => {
       // Navegar para consultas
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
@@ -42,7 +42,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-02: Deve exibir informações completas de cada consulta', () => {
+    it('Deve exibir informações completas de cada consulta', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -66,7 +66,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-03: Deve exibir ícones corretos por status', () => {
+    it('Deve exibir ícones corretos por status', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -86,7 +86,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-04: Deve mostrar badges de status com cores corretas', () => {
+    it('Deve mostrar badges de status com cores corretas', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -105,7 +105,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.bg-green-100.text-green-700').should('exist');
     });
 
-    it('CT-05: Deve permitir scroll na lista de consultas', () => {
+    it('Deve permitir scroll na lista de consultas', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -118,7 +118,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.bg-white.rounded-xl.shadow-sm.p-4').should('be.visible');
     });
 
-    it('CT-06: Deve manter consultas ordenadas por data', () => {
+    it('Deve manter consultas ordenadas por data', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -151,7 +151,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.wait(500);
     });
 
-    it('CT-07: Deve filtrar consultas por status "Todas"', () => {
+    it('Deve filtrar consultas por status "Todas"', () => {
       // Clicar no filtro Todas
       cy.contains('button', /todas/i).click();
       cy.wait(300);
@@ -166,7 +166,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
         .should('have.length.greaterThan', 0);
     });
 
-    it('CT-08: Deve filtrar apenas consultas agendadas', () => {
+    it('Deve filtrar apenas consultas agendadas', () => {
       // Clicar no filtro Agendada
       cy.contains('button', /agendada/i).click();
       cy.wait(300);
@@ -187,7 +187,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.bg-green-100.text-green-700').should('not.exist');
     });
 
-    it('CT-09: Deve filtrar apenas consultas realizadas', () => {
+    it('Deve filtrar apenas consultas realizadas', () => {
       // Clicar no filtro Realizada
       cy.contains('button', /realizada/i).click();
       cy.wait(300);
@@ -210,7 +210,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.bg-blue-100.text-blue-700').should('not.exist');
     });
 
-    it('CT-10: Deve filtrar consultas canceladas (quando existirem)', () => {
+    it('Deve filtrar consultas canceladas (quando existirem)', () => {
       // Clicar no filtro Cancelada
       cy.contains('button', /cancelada/i).click();
       cy.wait(300);
@@ -229,7 +229,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-11: Deve alternar entre filtros mantendo funcionalidade', () => {
+    it('Deve alternar entre filtros mantendo funcionalidade', () => {
       const filtros = ['Todas', 'Agendada', 'Realizada', 'Cancelada'];
 
       filtros.forEach(filtro => {
@@ -250,7 +250,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-12: Deve persistir filtro ao navegar entre telas', () => {
+    it('Deve persistir filtro ao navegar entre telas', () => {
       // Aplicar filtro
       cy.contains('button', /realizada/i).click();
       cy.wait(300);
@@ -272,7 +272,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
         .should('have.class', 'bg-blue-600');
     });
 
-    it('CT-13: Deve mostrar scroll horizontal nos filtros em telas pequenas', () => {
+    it('Deve mostrar scroll horizontal nos filtros em telas pequenas', () => {
       // Verificar que os filtros têm overflow-x-auto
       cy.get('.flex.space-x-2.mb-6.overflow-x-auto')
         .should('exist')
@@ -299,7 +299,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.contains(/dr\. joão silva/i, { timeout: 10000 }).should('be.visible');
     });
 
-    it('CT-14: Profissional deve ver apenas suas consultas', () => {
+    it('Profissional deve ver apenas suas consultas', () => {
       // Verificar dashboard com consultas do profissional
       cy.contains(/horários disponíveis/i).should('be.visible');
 
@@ -310,7 +310,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.contains(/maria silva santos/i).should('be.visible');
     });
 
-    it('CT-15: Deve exibir contadores corretos de consultas', () => {
+    it('Deve exibir contadores corretos de consultas', () => {
       // Verificar contador de agendadas
       cy.get('[data-testid="professional-scheduled-count"]').within(() => {
         cy.contains(/agenda/i).should('be.visible');
@@ -337,7 +337,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-16: Deve listar pacientes com data e hora da consulta', () => {
+    it('Deve listar pacientes com data e hora da consulta', () => {
       // Verificar lista de horários disponíveis
       cy.contains(/horários disponíveis/i).should('be.visible');
 
@@ -351,7 +351,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.text-sm.text-gray-600').should('have.length.greaterThan', 0);
     });
 
-    it('CT-17: Deve navegar para lista completa de consultas', () => {
+    it('Deve navegar para lista completa de consultas', () => {
       // Usar navegação bottom para ir para consultas
       cy.get('[data-testid="nav-agenda"]').click();
       cy.wait(500);
@@ -364,7 +364,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.contains('button', /agendada/i).should('be.visible');
     });
 
-    it('CT-18: Profissional deve ver pacientes, não profissionais nas consultas', () => {
+    it('Profissional deve ver pacientes, não profissionais nas consultas', () => {
       cy.get('[data-testid="nav-agenda"]').click();
       cy.wait(500);
 
@@ -389,7 +389,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.wait(500);
     });
 
-    it('CT-19: Deve exibir seção de próxima consulta no dashboard', () => {
+    it('Deve exibir seção de próxima consulta no dashboard', () => {
       // Verificar título da seção
       cy.contains(/próxima consulta/i).should('be.visible');
 
@@ -397,7 +397,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.bg-white.rounded-xl.shadow-sm.p-6').should('exist');
     });
 
-    it('CT-20: Deve mostrar apenas a próxima consulta agendada', () => {
+    it('Deve mostrar apenas a próxima consulta agendada', () => {
       cy.contains(/próxima consulta/i).should('be.visible');
 
       // Usar .first() para pegar apenas o primeiro card de consultas
@@ -408,7 +408,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-21: Deve exibir mensagem quando não há consultas', () => {
+    it('Deve exibir mensagem quando não há consultas', () => {
       // Logout e login com paciente sem consultas
       cy.get('[data-testid="btn-logout"]').click({ force: true });
       cy.wait(1000);
@@ -422,7 +422,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.contains(/nenhuma consulta agendada/i).should('be.visible');
     });
 
-    it('CT-22: Consulta deve ter ícone, nome, especialidade e status', () => {
+    it('Consulta deve ter ícone, nome, especialidade e status', () => {
       // Buscar especificamente a seção de "Próxima Consulta"
       cy.contains(/próxima consulta/i).should('be.visible');
       
@@ -454,7 +454,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-23: Deve atualizar próxima consulta ao agendar nova', () => {
+    it('Deve atualizar próxima consulta ao agendar nova', () => {
       // Verificar estado inicial
       cy.contains(/próxima consulta/i).should('be.visible');
 
@@ -516,7 +516,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.wait(500);
     });
 
-    it('CT-24: Deve exibir nome completo do profissional', () => {
+    it('Deve exibir nome completo do profissional', () => {
       cy.get('.bg-white.rounded-xl.shadow-sm.p-4').first().within(() => {
         cy.get('.font-semibold.text-gray-800')
           .invoke('text')
@@ -524,26 +524,26 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-25: Deve exibir especialidade médica', () => {
+    it('Deve exibir especialidade médica', () => {
       cy.get('.bg-white.rounded-xl.shadow-sm.p-4').first().within(() => {
         cy.contains(/cardiologia|ginecologia|pediatria|clínica geral|dermatologia/i)
           .should('be.visible');
       });
     });
 
-    it('CT-26: Deve exibir data no formato correto', () => {
+    it('Deve exibir data no formato correto', () => {
       cy.get('.text-xs.text-gray-500').first()
         .invoke('text')
         .should('match', /\d{4}-\d{2}-\d{2}/);
     });
 
-    it('CT-27: Deve exibir horário no formato HH:MM', () => {
+    it('Deve exibir horário no formato HH:MM', () => {
       cy.get('.text-xs.text-gray-500').first()
         .invoke('text')
         .should('match', /\d{2}:\d{2}/);
     });
 
-    it('CT-28: Deve ter cores distintas para cada status', () => {
+    it('Deve ter cores distintas para cada status', () => {
       // Verificar cores de agendada
       cy.contains('button', /agendada/i).click();
       cy.wait(300);
@@ -559,7 +559,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.bg-green-100.text-green-700').should('exist'); // Badge verde
     });
 
-    it('CT-29: Deve exibir layout responsivo dos cards', () => {
+    it('Deve exibir layout responsivo dos cards', () => {
       // Verificar estrutura flex das consultas
       cy.get('.bg-white.rounded-xl.shadow-sm.p-4').first().within(() => {
         cy.get('.flex.items-center.justify-between').should('exist');
@@ -570,7 +570,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.w-12.h-12.rounded-full').should('exist');
     });
 
-    it('CT-30: Deve ter espaçamento adequado entre consultas', () => {
+    it('Deve ter espaçamento adequado entre consultas', () => {
       // Verificar classe space-y-4
       cy.get('.space-y-4').should('exist');
       
@@ -592,7 +592,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.wait(500);
     });
 
-    it('CT-31: Deve navegar do dashboard para lista de consultas', () => {
+    it('Deve navegar do dashboard para lista de consultas', () => {
       // Clicar no botão de consultas
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
@@ -602,7 +602,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.space-y-4').should('exist');
     });
 
-    it('CT-32: Deve usar bottom navigation para acessar consultas', () => {
+    it('Deve usar bottom navigation para acessar consultas', () => {
       // Usar navegação inferior
       cy.get('[data-testid="nav-consultations"]').click();
       cy.wait(500);
@@ -611,7 +611,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.contains(/consultas/i).should('be.visible');
     });
 
-    it('CT-33: Deve voltar ao dashboard usando botão de voltar', () => {
+    it('Deve voltar ao dashboard usando botão de voltar', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -624,7 +624,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('[data-testid="btn-schedule"]').should('be.visible');
     });
 
-    it('CT-34: Deve voltar ao dashboard usando bottom navigation', () => {
+    it('Deve voltar ao dashboard usando bottom navigation', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -636,7 +636,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.contains(/olá, maria/i).should('be.visible');
     });
 
-    it('CT-35: Deve manter estado da lista ao navegar', () => {
+    it('Deve manter estado da lista ao navegar', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -667,7 +667,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.wait(500);
     });
 
-    it('CT-36: Deve carregar lista de consultas rapidamente', () => {
+    it('Deve carregar lista de consultas rapidamente', () => {
       const start = Date.now();
       
       cy.get('[data-testid="btn-consultations"]').click();
@@ -678,7 +678,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-37: Filtros devem responder rapidamente', () => {
+    it('Filtros devem responder rapidamente', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -699,7 +699,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-38: Deve renderizar todos os cards sem lag', () => {
+    it('Deve renderizar todos os cards sem lag', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -713,7 +713,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.space-y-4').scrollTo('top', { duration: 1000 });
     });
 
-    it('CT-39: Layout deve ser responsivo em mobile (max-w-md)', () => {
+    it('Layout deve ser responsivo em mobile (max-w-md)', () => {
       // Verificar container principal
       cy.get('.max-w-md.mx-auto').should('exist');
 
@@ -729,7 +729,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.p-6').should('exist');
     });
 
-    it('CT-40: Deve manter legibilidade em telas pequenas', () => {
+    it('Deve manter legibilidade em telas pequenas', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -745,7 +745,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
   // ==============================================================
   context('Casos Edge e Validações Especiais', () => {
 
-    it('CT-41: Deve lidar com paciente sem consultas', () => {
+    it('Deve lidar com paciente sem consultas', () => {
       // Login com João que tem menos consultas
       cy.get('[data-testid="input-email"]').clear().type('joao@email.com');
       cy.get('[data-testid="input-password"]').clear().type('123456');
@@ -760,7 +760,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.contains(/consultas/i).should('be.visible');
     });
 
-    it('CT-42: Deve lidar com múltiplas consultas no mesmo dia', () => {
+    it('Deve lidar com múltiplas consultas no mesmo dia', () => {
       cy.get('[data-testid="input-email"]').clear().type('maria@email.com');
       cy.get('[data-testid="input-password"]').clear().type('123456');
       cy.get('[data-testid="btn-login"]').click();
@@ -774,7 +774,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
         .should('have.length.greaterThan', 0);
     });
 
-    it('CT-43: Deve exibir corretamente consultas de diferentes especialidades', () => {
+    it('Deve exibir corretamente consultas de diferentes especialidades', () => {
       cy.get('[data-testid="input-email"]').clear().type('maria@email.com');
       cy.get('[data-testid="input-password"]').clear().type('123456');
       cy.get('[data-testid="btn-login"]').click();
@@ -796,7 +796,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-44: Deve manter integridade dos dados ao aplicar filtros', () => {
+    it('Deve manter integridade dos dados ao aplicar filtros', () => {
       cy.get('[data-testid="input-email"]').clear().type('maria@email.com');
       cy.get('[data-testid="input-password"]').clear().type('123456');
       cy.get('[data-testid="btn-login"]').click();
@@ -839,7 +839,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
         });
     });
 
-    it('CT-45: Deve tratar textos longos sem quebrar layout', () => {
+    it('Deve tratar textos longos sem quebrar layout', () => {
       cy.get('[data-testid="input-email"]').clear().type('maria@email.com');
       cy.get('[data-testid="input-password"]').clear().type('123456');
       cy.get('[data-testid="btn-login"]').click();
@@ -880,7 +880,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.wait(500);
     });
 
-    it('CT-46: Botões de filtro devem ter feedback visual ao hover', () => {
+    it('Botões de filtro devem ter feedback visual ao hover', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -889,7 +889,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
         .should('have.class', 'rounded-full');
     });
 
-    it('CT-47: Cards devem ter sombra e bordas arredondadas', () => {
+    it('Cards devem ter sombra e bordas arredondadas', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -899,7 +899,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
         .and('have.class', 'shadow-sm');
     });
 
-    it('CT-48: Ícones devem ter tamanho consistente', () => {
+    it('Ícones devem ter tamanho consistente', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -911,7 +911,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-49: Deve ter contraste adequado em textos', () => {
+    it('Deve ter contraste adequado em textos', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -921,7 +921,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.text-gray-500').should('exist'); // Texto secundário
     });
 
-    it('CT-50: Deve ter espaçamento consistente entre elementos', () => {
+    it('Deve ter espaçamento consistente entre elementos', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -936,7 +936,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.p-6').should('exist');
     });
 
-    it('CT-51: Badges de status devem ser visualmente distintas', () => {
+    it('Badges de status devem ser visualmente distintas', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -951,7 +951,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.bg-blue-100.text-blue-700').should('exist');
     });
 
-    it('CT-52: Deve ter título claro na página de consultas', () => {
+    it('Deve ter título claro na página de consultas', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -961,7 +961,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
         .should('be.visible');
     });
 
-    it('CT-53: Botão de voltar deve ser facilmente identificável', () => {
+    it('Botão de voltar deve ser facilmente identificável', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -971,7 +971,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-54: Lista deve ter scroll suave', () => {
+    it('Lista deve ter scroll suave', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -987,7 +987,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       cy.get('.bg-white.rounded-xl.shadow-sm.p-4').should('be.visible');
     });
 
-    it('CT-55: Deve ter feedback visual ao clicar em filtros', () => {
+    it('Deve ter feedback visual ao clicar em filtros', () => {
       cy.get('[data-testid="btn-consultations"]').click();
       cy.wait(500);
 
@@ -1007,7 +1007,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
   // ==============================================================
   context('Integração entre Funcionalidades', () => {
 
-    it('CT-56: Nova consulta agendada deve aparecer na lista', () => {
+    it('Nova consulta agendada deve aparecer na lista', () => {
       // Login
       cy.get('[data-testid="input-email"]').clear().type('maria@email.com');
       cy.get('[data-testid="input-password"]').clear().type('123456');
@@ -1065,7 +1065,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
         });
     });
 
-    it('CT-57: Logout deve limpar estado das consultas', () => {
+    it('Logout deve limpar estado das consultas', () => {
       // Login e acessar consultas
       cy.get('[data-testid="input-email"]').clear().type('maria@email.com');
       cy.get('[data-testid="input-password"]').clear().type('123456');
@@ -1097,7 +1097,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
         .should('have.class', 'bg-blue-600');
     });
 
-    it('CT-58: Dados de consultas devem persistir durante navegação', () => {
+    it('Dados de consultas devem persistir durante navegação', () => {
       cy.get('[data-testid="input-email"]').clear().type('maria@email.com');
       cy.get('[data-testid="input-password"]').clear().type('123456');
       cy.get('[data-testid="btn-login"]').click();
@@ -1132,7 +1132,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
         });
     });
 
-    it('CT-59: Dashboard e lista devem mostrar informações consistentes', () => {
+    it('Dashboard e lista devem mostrar informações consistentes', () => {
       cy.get('[data-testid="input-email"]').clear().type('maria@email.com');
       cy.get('[data-testid="input-password"]').clear().type('123456');
       cy.get('[data-testid="btn-login"]').click();
@@ -1168,7 +1168,7 @@ describe('Gerenciamento de Consultas Realizadas - UBS Digital Salvador', () => {
       });
     });
 
-    it('CT-60: Deve sincronizar visualizações entre paciente e profissional', () => {
+    it('Deve sincronizar visualizações entre paciente e profissional', () => {
       // Login como paciente e agendar
       cy.get('[data-testid="input-email"]').clear().type('maria@email.com');
       cy.get('[data-testid="input-password"]').clear().type('123456');
